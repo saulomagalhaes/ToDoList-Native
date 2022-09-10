@@ -2,6 +2,7 @@
   "conventionalCommits.scopes": [
     "styles",
     "TodoList",
-    "App"
+    "App",
+    "ListEmpty"
   ]
 }
