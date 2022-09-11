@@ -26,7 +26,7 @@ export const styles = StyleSheet.create({
   },
   input: {
     backgroundColor: "#262626",
-    color: "#454545",
+    color: "#F2F2F2",
     paddingStart: 16,
     paddingEnd: 63,
     marginEnd: 4,
