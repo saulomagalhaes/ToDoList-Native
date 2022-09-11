@@ -26,6 +26,10 @@ export const styles = StyleSheet.create({
     color: "#F2F2F2",
     lineHeight: 20,
   },
+  textDone: {
+    textDecorationLine: "line-through",
+    color: "#808080",
+  },
   checkbox: {
     width: 24,
     height: 24,
