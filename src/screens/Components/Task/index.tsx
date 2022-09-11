@@ -6,10 +6,16 @@ import { styles } from "./styles";
 type Props = {
   title: string;
   onRemove: () => void;
+  onDone: () => void;
 };
 
-export function Task({ title, onRemove }: Props) {
+export function Task({ title, onRemove, onDone }: Props) {
   const [lineThrough, setLineThrough] = useState(false);
+
+  const taskDone = () => {
+    setLineThrough(!lineThrough);
+    onDone();
+  };
 
   return (
     <View style={styles.container}>
@@ -17,7 +23,7 @@ export function Task({ title, onRemove }: Props) {
         <Checkbox
           style={styles.checkbox}
           value={lineThrough}
-          onValueChange={setLineThrough}
+          onValueChange={taskDone}
         />
         <Text style={lineThrough ? styles.textDone : styles.text }>{title}</Text>
       </View>

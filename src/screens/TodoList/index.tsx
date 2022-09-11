@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   FlatList,
   Image,
@@ -13,7 +13,7 @@ import { ListEmpty } from "../Components/ListEmpty";
 import { Task } from "../Components/Task";
 import { styles } from "./styles";
 
-type Todo = {
+export type Todo = {
   id: string;
   title: string;
   done: boolean;
@@ -22,6 +22,13 @@ type Todo = {
 export function TodoList() {
   const [tasks, setTasks] = useState<Todo[]>([]);
   const [title, setTitle] = useState("");
+  const [totalTasksCreated, setTotalTasksCreated] = useState(0);
+  const [totalTasksCompleted, setTotalTasksCompleted] = useState(0);
+
+  useEffect(() => {
+    setTotalTasksCreated(tasks.length);
+    setTotalTasksCompleted(tasks.filter((task) => task.done).length);
+  }, [tasks]);
 
   const handleTaskAdd = () => {
     const task = { id: uuidv4(), title, done: false };
@@ -31,6 +38,17 @@ export function TodoList() {
 
   const handleTaskRemove = (id: string) => {
     setTasks((prevState) => prevState.filter((task) => task.id !== id));
+  };
+
+  const handleTaskDone = (id: string) => {
+    setTasks((prevstate)=> {
+      const task = prevstate.find((task) => task.id === id);
+      if (task) {
+        task.done = !task.done;
+        return [...prevstate];
+      }
+      return prevstate;
+    })
   };
 
   return (
@@ -63,7 +81,7 @@ export function TodoList() {
               <Text style={styles.textCreated}>Criadas</Text>
             </View>
             <View style={styles.boxSpan}>
-              <Text style={styles.span}>0</Text>
+              <Text style={styles.span}>{totalTasksCreated}</Text>
             </View>
           </View>
 
@@ -72,7 +90,7 @@ export function TodoList() {
               <Text style={styles.textFinished}>Concluídas</Text>
             </View>
             <View style={styles.boxSpan}>
-              <Text style={styles.span}>0</Text>
+              <Text style={styles.span}>{totalTasksCompleted}</Text>
             </View>
           </View>
         </View>
@@ -84,6 +102,7 @@ export function TodoList() {
               key={item.id}
               title={item.title}
               onRemove={() => handleTaskRemove(item.id)}
+              onDone={() => handleTaskDone(item.id)}
             />
           )}
           showsVerticalScrollIndicator={false}
