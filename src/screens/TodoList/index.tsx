@@ -7,8 +7,8 @@ import {
   TouchableOpacity,
   View
 } from "react-native";
-import 'react-native-get-random-values';
-import { v4 as uuidv4 } from 'uuid';
+import "react-native-get-random-values";
+import { v4 as uuidv4 } from "uuid";
 import { ListEmpty } from "../Components/ListEmpty";
 import { Task } from "../Components/Task";
 import { styles } from "./styles";
@@ -26,7 +26,11 @@ export function TodoList() {
   const handleTaskAdd = () => {
     const task = { id: uuidv4(), title, done: false };
     setTasks((prevState) => [...prevState, task]);
-    return setTitle(""); 
+    return setTitle("");
+  };
+
+  const handleTaskRemove = (id: string) => {
+    setTasks((prevState) => prevState.filter((task) => task.id !== id));
   };
 
   return (
@@ -79,7 +83,7 @@ export function TodoList() {
             <Task
               key={item.id}
               title={item.title}
-              // onRemove={() => handleParticipantRemove(item)}
+              onRemove={() => handleTaskRemove(item.id)}
             />
           )}
           showsVerticalScrollIndicator={false}

@@ -3,6 +3,7 @@
     "styles",
     "TodoList",
     "App",
-    "ListEmpty"
+    "ListEmpty",
+    "Task"
   ]
 }
