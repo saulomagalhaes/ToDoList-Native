@@ -24,3 +24,6 @@ Projeto de uma lista de tarefas utilizando React Native e Typescript.
 - Implementação da tela de login
 - Implementação do Backend
 - Funcionalidade editar tarefas
+
+## Projeto em funcionamento
+![Todo](https://github.com/saulomagalhaes/ToDoList-Native/blob/main/assets/todo.gif)
